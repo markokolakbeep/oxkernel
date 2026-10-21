@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-system-misc
+
+      # rustup reads rust-toolchain.toml and installs the pinned toolchain,
+      # the RISC-V target and the components.
+      - name: Install Rust
+        run: rustup show
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Lint
+        run: cargo xtask lint
+
+      - name: Test (host, in-kernel, usertests on 1 and 4 harts)
+        run: cargo xtask test

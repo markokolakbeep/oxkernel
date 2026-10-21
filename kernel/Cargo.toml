@@ -1,0 +1,19 @@
+[package]
+name = "kernel"
+description = "The oxkernel RISC-V kernel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "kernel"
+path = "src/main.rs"
+test = false
+bench = false
+
+[features]
+# Run the in-kernel test suite instead of /bin/init.
+ktest = []
+
+[dependencies]
+oxcore = { path = "../oxcore" }

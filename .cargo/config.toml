@@ -1,0 +1,5 @@
+[alias]
+xtask = "run --quiet --package xtask --"
+
+[target.riscv64imac-unknown-none-elf]
+rustflags = ["-C", "force-frame-pointers=yes"]

@@ -1,0 +1,26 @@
+[workspace]
+resolver = "3"
+members = ["oxcore", "kernel", "user", "mkfs", "xtask"]
+# Host-side crates. The kernel and user crates only build for RISC-V and are
+# driven by `cargo xtask`.
+default-members = ["oxcore", "mkfs", "xtask"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[profile.dev]
+panic = "abort"
+opt-level = 1
+
+[profile.release]
+panic = "abort"
+debug = true
+
+# User programs: optimized and stripped, so exec does not have to page in
+# debug info.
+[profile.user]
+inherits = "release"
+debug = false
+strip = true

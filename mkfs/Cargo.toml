@@ -1,0 +1,9 @@
+[package]
+name = "mkfs"
+description = "Builds oxfs disk images"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+oxcore = { path = "../oxcore" }

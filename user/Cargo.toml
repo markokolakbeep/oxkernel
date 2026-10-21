@@ -1,0 +1,15 @@
+[package]
+name = "user"
+description = "oxkernel user space: ulib plus init, sh and the core utilities"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "ulib"
+path = "src/lib.rs"
+test = false
+bench = false
+
+[dependencies]
+oxcore = { path = "../oxcore" }
